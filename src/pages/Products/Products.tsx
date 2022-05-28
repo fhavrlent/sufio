@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
+
 import { Product } from "../../components/Product";
-import data from "../../data/products.json";
 import { fetchProducts } from "../../store/products-actions";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 

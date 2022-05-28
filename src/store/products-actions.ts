@@ -1,6 +1,7 @@
+import { AnyAction, ThunkAction, Dispatch } from "@reduxjs/toolkit";
+
 import { productsSlice } from "./products-slice";
 import productsData from "../data/products.json";
-import { AnyAction, ThunkAction, Dispatch } from "@reduxjs/toolkit";
 import { RootState } from ".";
 
 export const productsActions = productsSlice.actions;

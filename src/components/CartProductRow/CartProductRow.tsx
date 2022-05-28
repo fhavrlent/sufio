@@ -1,12 +1,13 @@
 import { ChangeEvent } from "react";
 import { Form } from "react-bootstrap";
 import { Trash } from "react-bootstrap-icons";
+
 import {
   changeProductCartQuantity,
   removeProductFromCart,
 } from "../../store/cart-slice";
 import { useAppDispatch } from "../../store/redux-hooks";
-import { CartProduct, Product } from "../../types";
+import { CartProduct } from "../../types";
 
 export const CartProductRow = ({ product, quantity }: CartProduct) => {
   const { name, unitPrice, vat, stock, id } = product;

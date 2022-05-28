@@ -1,7 +1,8 @@
 import { Button, Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 import { Product as ProductType } from "../../types";
-import { useNavigate } from "react-router-dom";
 import { addProductToCart } from "../../store/cart-slice";
 
 export const Product = (props: ProductType) => {
