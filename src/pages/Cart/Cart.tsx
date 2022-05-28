@@ -20,9 +20,10 @@ export const Cart = () => {
   const totalWithoutVat = total - vatTotal;
 
   const onClickSendOrder = () => {
-    console.log({ ...cart });
-    navigate("/order", { state: { ...cart } });
-    dispatch(substractStock({ ...cart }));
+    const cartCopy = { ...cart };
+    console.log({ cartContent: cartCopy.items });
+    navigate("/order", { state: cartCopy });
+    dispatch(substractStock(cartCopy));
     dispatch(clearCart());
   };
 
