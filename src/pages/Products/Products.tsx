@@ -15,7 +15,7 @@ export const Products = () => {
   const allProducts = useAppSelector((state) => state.products);
   return (
     <Container>
-      <Row>
+      <Row className="mt-5 mb-5">
         <Col>
           <h1 className="text-center">Products</h1>
         </Col>

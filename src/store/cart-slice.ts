@@ -95,6 +95,9 @@ export const cartSlice = createSlice({
         return;
       }
     },
+    clearCart: () => {
+      return { ...initCartState };
+    },
   },
 });
 
@@ -102,4 +105,5 @@ export const {
   addProductToCart,
   removeProductFromCart,
   changeProductCartQuantity,
+  clearCart,
 } = cartSlice.actions;

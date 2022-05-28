@@ -26,7 +26,3 @@ export type Cart = {
   vats: CartVat[];
   total: number;
 };
-
-export type CartState = {
-  cart: Cart;
-};

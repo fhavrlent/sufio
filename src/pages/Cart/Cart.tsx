@@ -1,13 +1,16 @@
-import { Col, Container, Form, Row, Table, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Col, Container, Row, Table, Button } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
 
 import { CartInfoRow } from "../../components/CartInfoRow";
 import { CartProductRow } from "../../components/CartProductRow";
-import { useAppSelector } from "../../store/redux-hooks";
+import { clearCart } from "../../store/cart-slice";
+import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import "./Cart.css";
 
 export const Cart = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const cart = useAppSelector((state) => state.cart);
   const { items, total, vats } = cart;
 
@@ -15,15 +18,21 @@ export const Cart = () => {
 
   const totalWithoutVat = total - vatTotal;
 
+  const onClickSendOrder = () => {
+    dispatch(clearCart());
+    console.log({ ...cart });
+    navigate("/order", { state: { ...cart } });
+  };
+
   return (
     <Container>
-      <Row>
+      <Row className="mt-5 mb-5">
         <Col>
           <h1 className="text-center">Cart</h1>
         </Col>
       </Row>
       <Row>
-        <Col md={{ span: 8, offset: 2 }}>
+        <Col lg={{ span: 8, offset: 2 }}>
           <Table>
             <thead>
               <tr className="table-secondary d-flex">
@@ -62,11 +71,17 @@ export const Cart = () => {
       </Row>
       <Row>
         <Col
-          md={{ span: 8, offset: 2 }}
+          lg={{ span: 8, offset: 2 }}
           className="d-flex align-items-center justify-content-between"
         >
           <Link to="/products">← Back</Link>
-          <Button color="primary">Send Order</Button>
+          <Button
+            color="primary"
+            disabled={cart.items.length === 0}
+            onClick={onClickSendOrder}
+          >
+            Send Order
+          </Button>
         </Col>
       </Row>
     </Container>
