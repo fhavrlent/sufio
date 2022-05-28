@@ -20,7 +20,6 @@ export const cartSlice = createSlice({
       const vatCategory = action.payload.vat;
       const existingVat = state.vats.find((vat) => vat.vat === vatCategory);
       if (existingVat && vatCategory !== 0) {
-        existingVat.itemAmount += 1;
         existingVat.total += calculateVat(
           action.payload.unitPrice,
           action.payload.vat
@@ -28,7 +27,6 @@ export const cartSlice = createSlice({
       } else if (vatCategory !== 0) {
         state.vats.push({
           vat: vatCategory,
-          itemAmount: 1,
           total: calculateVat(action.payload.unitPrice, action.payload.vat),
         });
       }
@@ -48,11 +46,9 @@ export const cartSlice = createSlice({
         const vatCategory = action.payload.vat;
         const existingVat = state.vats.find((vat) => vat.vat === vatCategory);
         if (existingVat) {
-          existingVat.itemAmount -= 1;
-          existingVat.total -= calculateVat(
-            action.payload.unitPrice,
-            action.payload.vat
-          );
+          existingVat.total -=
+            calculateVat(action.payload.unitPrice, action.payload.vat) *
+            productToRemove.quantity;
         }
         state.items = state.items.filter(
           (product) => product.product.id !== action.payload.id

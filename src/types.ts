@@ -17,7 +17,6 @@ export type CartProducts = CartProduct[];
 
 export type CartVat = {
   vat: number;
-  itemAmount: number;
   total: number;
 };
 
