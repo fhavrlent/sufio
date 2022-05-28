@@ -1,3 +1,3 @@
 export {Cart} from "./Cart"
-export {Store} from "./Store"
-export {Purchase} from "./Purchase"
+export {Order} from "./Order" 
+export {Products} from "./Products"
