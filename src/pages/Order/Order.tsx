@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -31,13 +31,13 @@ export const Order = () => {
       <Row>
         <Col md={{ span: 2, offset: 5 }}>
           {items.map((item) => (
-            <>
+            <Fragment key={item.product.id}>
               <div className="d-flex justify-content-between align-items-center">
                 <div>{item.quantity}x</div>
                 <div>{item.product.name}</div>
               </div>
               <hr />
-            </>
+            </Fragment>
           ))}
         </Col>
       </Row>
@@ -45,7 +45,8 @@ export const Order = () => {
         <Col className="text-center mt-5">
           <span>
             Please send us the pavment of{" "}
-            <strong className="h3">{total} €</strong> to our bitcoin address.
+            <strong className="h3">{total.toFixed(2)} €</strong> to our bitcoin
+            address.
           </span>
         </Col>
       </Row>

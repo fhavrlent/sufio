@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CartInfoRow } from "../../components/CartInfoRow";
 import { CartProductRow } from "../../components/CartProductRow";
 import { clearCart } from "../../store/cart-slice";
+import { substractStock } from "../../store/products-slice";
 import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 import "./Cart.css";
@@ -19,9 +20,10 @@ export const Cart = () => {
   const totalWithoutVat = total - vatTotal;
 
   const onClickSendOrder = () => {
-    dispatch(clearCart());
     console.log({ ...cart });
     navigate("/order", { state: { ...cart } });
+    dispatch(substractStock({ ...cart }));
+    dispatch(clearCart());
   };
 
   return (
