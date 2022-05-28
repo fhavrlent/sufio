@@ -1,6 +1,8 @@
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
+import { OrderItemList } from "../../components/OrderItemList";
+import { PaymentInfo } from "../../components/PaymentInfo";
 
 import { Cart } from "../../types";
 
@@ -30,24 +32,12 @@ export const Order = () => {
       </Row>
       <Row>
         <Col md={{ span: 2, offset: 5 }}>
-          {items.map((item) => (
-            <Fragment key={item.product.id}>
-              <div className="d-flex justify-content-between align-items-center">
-                <div>{item.quantity}x</div>
-                <div>{item.product.name}</div>
-              </div>
-              <hr />
-            </Fragment>
-          ))}
+          <OrderItemList items={items} />
         </Col>
       </Row>
       <Row>
         <Col className="text-center mt-5">
-          <span>
-            Please send us the pavment of{" "}
-            <strong className="h3">{total.toFixed(2)} €</strong> to our bitcoin
-            address.
-          </span>
+          <PaymentInfo total={total} />
         </Col>
       </Row>
       <Row className="mt-5">

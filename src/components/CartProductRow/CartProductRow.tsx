@@ -35,7 +35,6 @@ export const CartProductRow = ({ product, quantity }: CartProduct) => {
           style={{ maxWidth: "30%" }}
           value={quantity.toString()}
           onChange={onChangeAmount}
-          step={1}
         />
         <span className="remove-from-cart" onClick={onClickDelete}>
           <Trash className="ms-2" />
