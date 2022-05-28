@@ -10,7 +10,7 @@ export const Products = () => {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, []);
+  }, [dispatch]);
 
   const allProducts = useAppSelector((state) => state.products);
   return (

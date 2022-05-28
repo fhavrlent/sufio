@@ -15,7 +15,7 @@ export const Order = () => {
     if (!location.state) {
       navigate("/products");
     }
-  }, [location.state]);
+  }, [location.state, navigate]);
 
   if (!location?.state) return null;
 
