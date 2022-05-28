@@ -25,4 +25,4 @@ export const productsSlice = createSlice({
   },
 });
 
-export const { substractStock } = productsSlice.actions;
+export const { substractStock, setProducts } = productsSlice.actions;

@@ -1,10 +1,8 @@
 import { AnyAction, ThunkAction, Dispatch } from "@reduxjs/toolkit";
 
-import { productsSlice } from "./products-slice";
+import { setProducts } from "./products-slice";
 import productsData from "../data/products.json";
 import { RootState } from ".";
-
-export const productsActions = productsSlice.actions;
 
 export const fetchProducts =
   (): ThunkAction<void, RootState, unknown, AnyAction> =>
@@ -20,6 +18,6 @@ export const fetchProducts =
         })
       );
 
-      dispatch(productsActions.setProducts(remapedProducts));
+      dispatch(setProducts(remapedProducts));
     }
   };
