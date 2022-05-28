@@ -1,8 +1,18 @@
+import { useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Product } from "../../components/Product";
 import data from "../../data/products.json";
+import { fetchProducts } from "../../store/products-actions";
+import { useAppDispatch, useAppSelector } from "../../store/redux-hooks";
 
 export const Products = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, []);
+
+  const allProducts = useAppSelector((state) => state.products);
   return (
     <Container>
       <Row>
@@ -11,9 +21,9 @@ export const Products = () => {
         </Col>
       </Row>
       <Row lg={4} md={2} sm={1}>
-        {data.map(({ id, unit_price_incl_vat, name }) => (
-          <Col>
-            <Product key={id} price={unit_price_incl_vat} name={name} />
+        {allProducts.map((product) => (
+          <Col key={product.id}>
+            <Product {...product} />
           </Col>
         ))}
       </Row>

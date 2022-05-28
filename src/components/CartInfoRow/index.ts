@@ -1,0 +1,1 @@
+export { CartInfoRow } from "./CartInfoRow";
