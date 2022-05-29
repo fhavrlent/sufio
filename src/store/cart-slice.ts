@@ -42,22 +42,21 @@ export const cartSlice = createSlice({
       const productToRemove = state.items.find(
         (product) => product.product.id === action.payload.id
       );
-      if (productToRemove) {
-        const vatCategory = action.payload.vat;
-        const existingVat = state.vats.find((vat) => vat.vat === vatCategory);
-        if (existingVat) {
-          existingVat.total -=
-            calculateVat(action.payload.unitPrice, action.payload.vat) *
-            productToRemove.quantity;
-        }
-        state.items = state.items.filter(
-          (product) => product.product.id !== action.payload.id
-        );
-        state.total -=
-          productToRemove.product.unitPrice * productToRemove.quantity;
-      } else {
-        return;
+
+      if (!productToRemove) return;
+
+      const vatCategory = action.payload.vat;
+      const existingVat = state.vats.find((vat) => vat.vat === vatCategory);
+      if (existingVat) {
+        existingVat.total -=
+          calculateVat(action.payload.unitPrice, action.payload.vat) *
+          productToRemove.quantity;
       }
+      state.items = state.items.filter(
+        (product) => product.product.id !== action.payload.id
+      );
+      state.total -=
+        productToRemove.product.unitPrice * productToRemove.quantity;
     },
     changeProductCartQuantity: (
       state,
@@ -69,27 +68,25 @@ export const cartSlice = createSlice({
       );
       const vatCategory = productInCart?.product.vat;
 
-      if (productInCart) {
-        state.vats = state.vats.map((vat) => {
-          if (vat.vat === vatCategory) {
-            vat.total =
-              calculateVat(
-                productInCart?.product.unitPrice,
-                productInCart?.product.vat
-              ) * quantity;
-          }
-          return vat;
-        });
+      if (!productInCart) return;
 
-        productInCart.quantity = quantity;
-        const totalPrice = state.items.reduce(
-          (acc, item) => acc + item.product.unitPrice * item.quantity,
-          0
-        );
-        state.total = totalPrice;
-      } else {
-        return;
-      }
+      state.vats = state.vats.map((vat) => {
+        if (vat.vat === vatCategory) {
+          vat.total =
+            calculateVat(
+              productInCart?.product.unitPrice,
+              productInCart?.product.vat
+            ) * quantity;
+        }
+        return vat;
+      });
+
+      productInCart.quantity = quantity;
+      const totalPrice = state.items.reduce(
+        (acc, item) => acc + item.product.unitPrice * item.quantity,
+        0
+      );
+      state.total = totalPrice;
     },
     clearCart: () => {
       return { ...initCartState };
